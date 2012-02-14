@@ -1,0 +1,26 @@
+h1. Purpose
+
+The number guessing game is a proof-of-concept game for the REST game network. The purpose behind the game is to explore and implement RESTful mechanisms to support a simple game.
+
+h1. Notes
+
+No authentication / authorization yet.
+
+h1. API
+
+POST /numberguess/start
+response: [game-id] and the range of numbers
+
+GET /numberguess/[game-id]
+response: information about a game
+
+PUT /numberguess/[game-id]
+body: text/plan number
+response: too low/high or correct guess
+
+PUT /numberguess/[game-id]/end
+surrender the game
+
+
+
+
