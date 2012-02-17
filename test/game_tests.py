@@ -21,6 +21,7 @@ class GameTestCase(unittest.TestCase):
     def test_should_return_game_info(self):
         response = self.app.get('/123')
         self.assertEqual(200, response.status_code)
+        self.assertEqual('{ name: "Number Guess", id: "123" }', response.data)
 
     def test_should_return_too_high(self):
         response = self.app.post('/123/guesses')
