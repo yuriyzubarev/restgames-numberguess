@@ -13,33 +13,30 @@ class GameTestCase(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test1(self):
-        response = self.app.get('/')
-        assert 'Hello World!' in response.data
-
     def test_should_start_new_game(self):
         response = self.app.post('/start')
-        self.assertTrue(False)
+        self.assertEqual(201, response.status_code)
+        self.assertIsNotNone(response.headers["Location"])
 
     def test_should_return_game_info(self):
         response = self.app.get('/123')
-        self.assertTrue(False)
+        self.assertEqual(200, response.status_code)
 
     def test_should_return_too_high(self):
-        response = self.app.put('/123')
-        self.assertTrue(False)
+        response = self.app.post('/123/guesses')
+        self.assertEqual(200, response.status_code)
 
     def test_should_return_too_low(self):
-        response = self.app.put('/123')
-        self.assertTrue(False)
+        response = self.app.post('/123/guesses')
+        self.assertEqual(200, response.status_code)
 
     def test_should_return_match(self):
-        response = self.app.put('/123')
-        self.assertTrue(False)
+        response = self.app.post('/123/guesses')
+        self.assertEqual(200, response.status_code)
 
     def test_should_end_inprogress_game(self):
-        response = self.app.put('/123/end')
-        self.assertTrue(False)
+        response = self.app.post('/123/end')
+        self.assertEqual(200, response.status_code)
 
 if __name__ == '__main__':
     unittest.main()
