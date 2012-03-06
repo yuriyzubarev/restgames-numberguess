@@ -1,6 +1,7 @@
 import os
 import unittest
 import tempfile
+import json
 
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
@@ -21,18 +22,18 @@ class GameTestCase(unittest.TestCase):
     def test_should_return_game_info(self):
         response = self.app.get('/123')
         self.assertEqual(200, response.status_code)
-        self.assertEqual('{ name: "Number Guess", id: "123" }', response.data)
+        self.assertEqual(json.dumps({"name": "Number Guess", "id": 123}, indent = 2), response.data)
 
     def test_should_return_too_high(self):
-        response = self.app.post('/123/guesses')
+        response = self.app.post('/123/guesses', data = dict(guess=7))
         self.assertEqual(200, response.status_code)
 
     def test_should_return_too_low(self):
-        response = self.app.post('/123/guesses')
+        response = self.app.post('/123/guesses', data = dict(guess=3))
         self.assertEqual(200, response.status_code)
 
     def test_should_return_match(self):
-        response = self.app.post('/123/guesses')
+        response = self.app.post('/123/guesses', data = dict(guess=5))
         self.assertEqual(200, response.status_code)
 
     def test_should_end_inprogress_game(self):
