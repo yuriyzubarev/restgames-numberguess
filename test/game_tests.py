@@ -18,6 +18,7 @@ class GameTestCase(unittest.TestCase):
         response = self.app.post('/start')
         self.assertEqual(201, response.status_code)
         self.assertIsNotNone(response.headers["Location"])
+        self.assertEqual('/123', response.headers["Location"][-4:])
 
     def test_should_return_game_info(self):
         response = self.app.get('/123')

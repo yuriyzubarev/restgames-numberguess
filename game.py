@@ -11,7 +11,7 @@ def hello_world():
 def start_game():
     response = app.make_response("Started")
     response.status_code = 201
-    response.headers["Location"] = "location"
+    response.headers["Location"] = "/123"
     return response
 
 @app.route('/<int:game_id>')
