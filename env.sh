@@ -14,9 +14,9 @@ then
   
   tmux split-window -v -t $W
   tmux send-keys 'source venv/bin/activate' C-m
-  tmux send-keys 'start server' C-m
+  tmux send-keys 'foreman start' C-m
   
-  tmux split-window -v -t $W
+  tmux new-window -n git 
   tmux send-keys 'git status' C-m
 
   tmux select-window -t $S:1
